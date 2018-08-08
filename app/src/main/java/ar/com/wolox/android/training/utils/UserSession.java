@@ -1,5 +1,7 @@
 package ar.com.wolox.android.training.utils;
 
+import android.util.Log;
+
 import ar.com.wolox.wolmo.core.di.scopes.ApplicationScope;
 import ar.com.wolox.wolmo.core.util.SharedPreferencesManager;
 
@@ -18,7 +20,7 @@ public class UserSession {
     }
 
     private void setEmail(String email) {
-        mEmail= email;
+        mEmail = email;
         mSharedPreferencesManager.store(Extras.UserLogin.EMAIL, email);
     }
 
@@ -50,5 +52,9 @@ public class UserSession {
     public void setUser(String email, String password) {
         this.setEmail(email);
         this.setPassword(password);
+    }
+
+    public Boolean isLoged() {
+        return getEmail() != null && getPassword() != null;
     }
 }
