@@ -3,7 +3,6 @@ package ar.com.wolox.android.training.ui.home;
 import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
-import ar.com.wolox.android.training.utils.UserSession;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
 public class HomeActivity extends WolmoActivity {

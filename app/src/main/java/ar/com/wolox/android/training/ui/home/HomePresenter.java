@@ -5,7 +5,6 @@ import android.app.Activity;
 import javax.inject.Inject;
 
 import ar.com.wolox.android.training.utils.UserSession;
-import ar.com.wolox.android.training.utils.Utils;
 import ar.com.wolox.wolmo.core.presenter.BasePresenter;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
@@ -19,9 +18,5 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     @Inject
     public HomePresenter(UserSession userSession) {
         mUserSession = userSession;
-        }
-
-    public void validateLogin(Activity activity) {
-        Utils.validateLogin(activity, mUserSession);
     }
 }

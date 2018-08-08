@@ -8,12 +8,10 @@ import javax.inject.Inject;
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
     // Constants
-    public static final String TAG = "LoginPresenter";
-    public static final int NUMBER_MAX = 1000;
-    public static final int NUMBER_MIN = 200;
 
     // Variables
     private UserSession mUserSession;
+    private Boolean userLoged;
 
     // Constructor
     @Inject
@@ -29,16 +27,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             return;
         }
 
-        mUserSession.setUser(email, password);
+        mUserSession.setEmail(email);
         getView().onLoginSuccess();
-    }
-
-    public String getEmail() {
-        return mUserSession.getEmail();
-    }
-
-    public String getPassword() {
-        return mUserSession.getPassword();
     }
 
     private Boolean validateEmailField(String email) {
@@ -68,5 +58,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     private Boolean validateEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public Boolean isUserLoged() {
+        return mUserSession.isLoged();
     }
 }
