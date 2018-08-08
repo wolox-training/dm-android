@@ -1,7 +1,7 @@
 package ar.com.wolox.android.login.di;
 
-import ar.com.wolox.android.login.ui.training.TrainingActivity;
-import ar.com.wolox.android.login.ui.training.TrainingFragment;
+import ar.com.wolox.android.login.ui.training.LoginActivity;
+import ar.com.wolox.android.login.ui.training.LoginFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -10,8 +10,8 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class AppModule {
 
     @ContributesAndroidInjector
-    abstract TrainingActivity exampleActivity();
+    abstract LoginActivity exampleActivity();
 
     @ContributesAndroidInjector
-    abstract TrainingFragment exampleFragment();
+    abstract LoginFragment exampleFragment();
 }

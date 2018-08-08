@@ -6,10 +6,10 @@ import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
 import javax.inject.Inject;
 
-public class TrainingActivity extends WolmoActivity {
+public class LoginActivity extends WolmoActivity {
 
     @Inject
-    TrainingFragment mTrainingFragment;
+    LoginFragment mLoginFragment;
 
     @Override
     protected int layout() {
@@ -18,6 +18,6 @@ public class TrainingActivity extends WolmoActivity {
 
     @Override
     protected void init() {
-        replaceFragment(R.id.activity_base_content, mTrainingFragment);
+        replaceFragment(R.id.activity_base_content, mLoginFragment);
     }
 }
