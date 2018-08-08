@@ -40,11 +40,6 @@ public class RandomFragment extends WolmoFragment<RandomPresenter> implements IR
         mFragmentViewpagerTitle.setText(getString(R.string.page_1_title, username));
     }
 
-    @OnClick(R.id.fragment_page1_randomize_button)
-    void onRandomClick() {
-        getPresenter().generateRandomNumber();
-    }
-
     @Override
     public void onRandomNumberUpdate(int someNumber) {
         mFragmentPage1MessageTextView.setText(getString(R.string.example_message, someNumber));

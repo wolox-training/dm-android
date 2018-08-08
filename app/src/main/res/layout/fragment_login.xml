@@ -48,6 +48,7 @@
         android:text="@string/fragment_login_signup" />
 
     <TextView
+        android:id="@+id/fragment_login_terms_conditions"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_none"
         android:layout_weight="1"

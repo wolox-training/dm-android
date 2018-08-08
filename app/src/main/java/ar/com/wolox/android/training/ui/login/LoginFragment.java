@@ -1,12 +1,17 @@
 package ar.com.wolox.android.training.ui.login;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import ar.com.wolox.android.R;
+import ar.com.wolox.android.training.ui.home.HomeActivity;
+import ar.com.wolox.android.training.ui.signup.SignupActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 import javax.inject.Inject;
@@ -29,8 +34,16 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        mEmail.setText(getPresenter().getEmail());
-        mPassword.setText(getPresenter().getPassword());
+        if (getPresenter().isUserLoged()) {
+            goToHome();
+        }
+    }
+
+    public void goToHome() {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     @OnClick(R.id.fragment_login_login)
@@ -40,7 +53,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void onLoginSuccess() {
-
+        goToHome();
     }
 
     @Override
@@ -51,5 +64,18 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void onLoginPasswordError(String error) {
         mPassword.setError(error);
+    }
+
+    @OnClick(R.id.fragment_login_signup)
+    public void onClickSignup() {
+        Intent intent = new Intent(getActivity(), SignupActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.fragment_login_terms_conditions)
+    public void onClickTermsAndConditions() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.wolox.com.ar/"));
+        startActivity(intent);
     }
 }
