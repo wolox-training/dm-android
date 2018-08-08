@@ -18,7 +18,7 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "ar.com.wolox.android.example"
+        applicationId "ar.com.wolox.android.training"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
