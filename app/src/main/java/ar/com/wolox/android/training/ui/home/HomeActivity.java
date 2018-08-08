@@ -1,14 +1,14 @@
-package ar.com.wolox.android.training.ui.login;
+package ar.com.wolox.android.training.ui.home;
+
+import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
-import javax.inject.Inject;
-
-public class LoginActivity extends WolmoActivity {
+public class HomeActivity extends WolmoActivity {
 
     @Inject
-    LoginFragment mLoginFragment;
+    HomeFragment mHomeFragment;
 
     @Override
     protected int layout() {
@@ -17,6 +17,6 @@ public class LoginActivity extends WolmoActivity {
 
     @Override
     protected void init() {
-        replaceFragment(R.id.activity_base_content, mLoginFragment);
+        replaceFragment(R.id.activity_base_content, mHomeFragment);
     }
 }
