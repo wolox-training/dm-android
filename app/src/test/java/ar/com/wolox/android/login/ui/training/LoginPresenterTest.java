@@ -9,30 +9,30 @@ import ar.com.wolox.android.login.utils.UserSession;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ExamplePresenterTest {
+public class LoginPresenterTest {
 
-    private IExampleView mExampleView;
-    private ExamplePresenter mExamplePresenter;
+    private ILoginView mExampleView;
+    private LoginPresenter mLoginPresenter;
     private UserSession mUserSession;
 
     @Before
     public void createInstances() {
-        mExampleView = mock(IExampleView.class);
+        mExampleView = mock(ILoginView.class);
         mUserSession = mock(UserSession.class);
-        mExamplePresenter = new ExamplePresenter(mUserSession);
+        mLoginPresenter = new LoginPresenter(mUserSession);
     }
 
     @Test
     public void usernameIsStored() {
-        mExamplePresenter.attachView(mExampleView);
-        mExamplePresenter.storeUsername("Test");
+        mLoginPresenter.attachView(mExampleView);
+        mLoginPresenter.storeUsername("Test");
         verify(mUserSession, times(1)).setUsername("Test");
     }
 
     @Test
     public void storeUsernameUpdatesView() {
-        mExamplePresenter.attachView(mExampleView);
-        mExamplePresenter.storeUsername("Test");
+        mLoginPresenter.attachView(mExampleView);
+        mLoginPresenter.storeUsername("Test");
         verify(mExampleView, times(1)).onUsernameSaved();
     }
 

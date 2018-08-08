@@ -9,25 +9,46 @@ import javax.inject.Inject;
 public class UserSession {
 
     private SharedPreferencesManager mSharedPreferencesManager;
-    private String mUsername;
+    private String mEmail;
+    private String mPassword;
 
     @Inject
     public UserSession(SharedPreferencesManager sharedPreferencesManager) {
         mSharedPreferencesManager = sharedPreferencesManager;
     }
 
-    public void setUsername(String username) {
-        mUsername = username;
-        mSharedPreferencesManager.store(Extras.UserLogin.USERNAME, username);
+    private void setEmail(String email) {
+        mEmail= email;
+        mSharedPreferencesManager.store(Extras.UserLogin.EMAIL, email);
     }
 
-    public String getUsername() {
+    public String getEmail() {
         // Really, we don't need to query the username because this instance live as long as the
         // application, but we should add a check in case Android decides to kill the application
         // and return to a state where this isn't initialized.
-        if (mUsername == null) {
-            mUsername = mSharedPreferencesManager.get(Extras.UserLogin.USERNAME, null);
+        if (mEmail == null) {
+            mEmail = mSharedPreferencesManager.get(Extras.UserLogin.EMAIL, null);
         }
-        return mUsername;
+        return mEmail;
+    }
+
+    private void setPassword(String password) {
+        mPassword = password;
+        mSharedPreferencesManager.store(Extras.UserLogin.PASSWORD, password);
+    }
+
+    public String getPassword() {
+        // Really, we don't need to query the username because this instance live as long as the
+        // application, but we should add a check in case Android decides to kill the application
+        // and return to a state where this isn't initialized.
+        if (mPassword == null) {
+            mPassword = mSharedPreferencesManager.get(Extras.UserLogin.PASSWORD, null);
+        }
+        return mPassword;
+    }
+
+    public void setUser(String email, String password) {
+        this.setEmail(email);
+        this.setPassword(password);
     }
 }

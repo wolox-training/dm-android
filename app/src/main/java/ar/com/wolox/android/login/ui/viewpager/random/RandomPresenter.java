@@ -1,7 +1,7 @@
 package ar.com.wolox.android.login.ui.viewpager.random;
 
-import static ar.com.wolox.android.login.ui.training.ExamplePresenter.NUMBER_MAX;
-import static ar.com.wolox.android.login.ui.training.ExamplePresenter.NUMBER_MIN;
+import static ar.com.wolox.android.login.ui.training.LoginPresenter.NUMBER_MAX;
+import static ar.com.wolox.android.login.ui.training.LoginPresenter.NUMBER_MIN;
 
 import android.util.Log;
 
@@ -27,7 +27,7 @@ public class RandomPresenter extends BasePresenter<IRandomView> {
 
     @Override
     public void onViewAttached() {
-        getView().setUsername(mUserSession.getUsername());
+        //getView().setUsername(mUserSession.getUsername());
     }
 
     public int generateRandomNumber() {
