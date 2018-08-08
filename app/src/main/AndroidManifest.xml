@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".login.ui.training.LoginActivity"
+            android:name=".training.ui.login.LoginActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -26,14 +26,6 @@
 
         <activity
             android:name=".training.ui.viewpager.ViewpagerActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".training.ui.home.HomeActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".training.ui.signup.SignupActivity"
             android:screenOrientation="portrait" />
 
     </application>
