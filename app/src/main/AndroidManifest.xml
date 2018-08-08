@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".login.ui.training.TrainingActivity"
+            android:name=".login.ui.training.LoginActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>

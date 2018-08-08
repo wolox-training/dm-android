@@ -17,13 +17,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TrainingFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
+public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
     @BindView(R.id.fragment_login_email) TextView mEmail;
     @BindView(R.id.fragment_login_password) TextView mPassword;
 
     @Inject
-    public TrainingFragment() {}
+    public LoginFragment() {}
 
     @Override
     public int layout() {
