@@ -1,12 +1,12 @@
 package ar.com.wolox.android.training.ui.login;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
-
-import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
@@ -15,6 +15,9 @@ import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.signup.SignupActivity;
 import ar.com.wolox.android.training.ui.views.CustomButtonView;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -32,8 +35,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     TextView mTermsAndConditions;
 
     @Inject
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public int layout() {
@@ -42,7 +44,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        mEmail.setText(getPresenter().getUserEmail());
+        mEmail.setText(getPresenter().getEmail());
         mLoginBtn.setText(R.string.login_login_btn_text);
         mLoginBtn.setColor(R.color.white);
         mSignupBtn.setText(R.string.login_signup_btn_text);
