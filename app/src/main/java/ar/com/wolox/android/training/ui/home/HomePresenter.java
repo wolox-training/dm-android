@@ -16,5 +16,5 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     @Inject
     public HomePresenter(UserSession userSession) {
         mUserSession = userSession;
-        }
+    }
 }
