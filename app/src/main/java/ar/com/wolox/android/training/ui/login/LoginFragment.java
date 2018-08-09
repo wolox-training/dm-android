@@ -104,13 +104,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginEmailError(String error) {
-        mEmail.setError(error);
-    }
-
-    @Override
-    public void onLoginPasswordError(String error) {
-        mPassword.setError(error);
+    public void onLoginError(ErrorCode errorCode) {
+        switch (errorCode) {
+            case INVALID_CREDENTIALS:
+                mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+                break;
+        }
     }
 
     @OnClick(R.id.fragment_login_signup)
