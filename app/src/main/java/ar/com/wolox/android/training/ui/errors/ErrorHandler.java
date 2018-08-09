@@ -10,7 +10,7 @@ public class ErrorHandler {
                 return "El email ingresado es incorrecto";
 
             case INVALID_CREDENTIALS:
-                return "Usuario o clave incorrectos";
+                return "Usuario o clave incorrectos"
 
             case INERNET_CONNECTION_ERROR:
                 return "Error en la conexion a internet";
