@@ -1,7 +1,5 @@
 package ar.com.wolox.android.training.utils;
 
-import android.util.Log;
-
 import ar.com.wolox.wolmo.core.di.scopes.ApplicationScope;
 import ar.com.wolox.wolmo.core.util.SharedPreferencesManager;
 
@@ -12,14 +10,13 @@ public class UserSession {
 
     private SharedPreferencesManager mSharedPreferencesManager;
     private String mEmail;
-    private String mPassword;
 
     @Inject
     public UserSession(SharedPreferencesManager sharedPreferencesManager) {
         mSharedPreferencesManager = sharedPreferencesManager;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         mEmail = email;
         mSharedPreferencesManager.store(Extras.UserLogin.EMAIL, email);
     }
@@ -32,9 +29,5 @@ public class UserSession {
             mEmail = mSharedPreferencesManager.get(Extras.UserLogin.EMAIL, null);
         }
         return mEmail;
-    }
-
-    public void setUser(String email) {
-        this.setEmail(email);
     }
 }

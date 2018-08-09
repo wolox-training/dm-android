@@ -92,6 +92,7 @@ buildscript {
     ext.leak_canary_version = '1.5.1'
     ext.chuck_version = '1.1.0'
     ext.powermock_version = '1.7.0'
+    ext.retrofit_version = '2.4.0'
 }
 
 dependencies {
@@ -119,6 +120,7 @@ dependencies {
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     // Testing dependencies
     testImplementation "junit:junit:4.12"

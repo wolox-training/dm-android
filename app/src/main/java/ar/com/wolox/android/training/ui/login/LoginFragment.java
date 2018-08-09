@@ -59,33 +59,34 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void onLogin() {
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
-        ErrorCode errorCode;
 
-        if ((errorCode = this.validateEmailField(email)) != null) {
-            mEmail.setError(ErrorHandler.getErrorMessage(errorCode));
-        } else if ((errorCode = this.validatePasswordField(password)) != null) {
-            mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
-        } else {
+        Boolean validateErrors =    this.validateEmptyFields(email, password)
+                                    && this.validateEmailField(email);
+        if (validateErrors) {
             getPresenter().login(email, password);
         }
     }
 
-    private ErrorCode validateEmailField(String email) {
+    private Boolean validateEmptyFields(String email, String password) {
+
         if (!this.validateEmptyField(email)) {
-            return ErrorCode.EMPTY_FIELDS;
-        } else if (!this.validateEmail(email)) {
-            return ErrorCode.INVALID_EMAIL;
+            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            return false;
+        } else if (!this.validateEmptyField(password)) {
+            mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            return false;
         }
 
-        return null;
+        return true;
     }
 
-    public ErrorCode validatePasswordField(String password) {
-        if (!this.validateEmptyField(password)) {
-            return ErrorCode.EMPTY_FIELDS;
+    public Boolean validateEmailField(String email) {
+        if (!this.validateEmail(email)) {
+            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.INVALID_EMAIL));
+            return false;
         }
 
-        return null;
+        return true;
     }
 
     private Boolean validateEmptyField(String field) {
@@ -102,13 +103,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginEmailError(String error) {
-        mEmail.setError(error);
-    }
-
-    @Override
-    public void onLoginPasswordError(String error) {
-        mPassword.setError(error);
+    public void onLoginError(ErrorCode errorCode) {
+        switch (errorCode) {
+            case INVALID_CREDENTIALS:
+                mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+                break;
+        }
     }
 
     @OnClick(R.id.fragment_login_signup)
