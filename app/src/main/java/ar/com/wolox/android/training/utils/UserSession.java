@@ -34,27 +34,7 @@ public class UserSession {
         return mEmail;
     }
 
-    private void setPassword(String password) {
-        mPassword = password;
-        mSharedPreferencesManager.store(Extras.UserLogin.PASSWORD, password);
-    }
-
-    public String getPassword() {
-        // Really, we don't need to query the username because this instance live as long as the
-        // application, but we should add a check in case Android decides to kill the application
-        // and return to a state where this isn't initialized.
-        if (mPassword == null) {
-            mPassword = mSharedPreferencesManager.get(Extras.UserLogin.PASSWORD, null);
-        }
-        return mPassword;
-    }
-
-    public void setUser(String email, String password) {
+    public void setUser(String email) {
         this.setEmail(email);
-        this.setPassword(password);
-    }
-
-    public Boolean isLoged() {
-        return getEmail() != null && getPassword() != null;
     }
 }
