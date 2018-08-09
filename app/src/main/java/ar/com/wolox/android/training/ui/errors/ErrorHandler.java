@@ -9,6 +9,12 @@ public class ErrorHandler {
             case INVALID_EMAIL:
                 return "El email ingresado es incorrecto";
 
+            case INVALID_CREDENTIALS:
+                return "Usuario o clave incorrectos";
+
+            case CONNECTION_ERROR:
+                return "Error en la conexion";
+
             default:
                 return "";
         }
