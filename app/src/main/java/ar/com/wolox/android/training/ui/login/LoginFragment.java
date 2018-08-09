@@ -58,7 +58,45 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @OnClick(R.id.fragment_login_login)
     public void onLogin() {
-        getPresenter().login(mEmail.getText().toString(), mPassword.getText().toString());
+        String email = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
+
+        Boolean validateErrors =    this.validateEmptyFields(email, password)
+                                    && this.validateEmailField(email);
+        if (validateErrors) {
+            getPresenter().login(email, password);
+        }
+    }
+
+    private Boolean validateEmptyFields(String email, String password) {
+
+        if (!this.validateEmptyField(email)) {
+            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            return false;
+        } else if (!this.validateEmptyField(password)) {
+            mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean validateEmailField(String email) {
+        if (!this.validateEmail(email)) {
+            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.INVALID_EMAIL));
+            return false;
+        }
+
+        return true;
+    }
+
+    private Boolean validateEmptyField(String field) {
+        return field.length() > 0;
+    }
+
+    private Boolean validateEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+>>>>>>> 63ff750... Login connection with database
     }
 
     @Override
@@ -67,13 +105,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onLoginEmailError(String error) {
-        mEmail.setError(error);
-    }
-
-    @Override
-    public void onLoginPasswordError(String error) {
-        mPassword.setError(error);
+    public void onLoginError(ErrorCode errorCode) {
+        switch (errorCode) {
+            case INVALID_CREDENTIALS:
+                mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+                break;
+        }
     }
 
     @OnClick(R.id.fragment_login_signup)

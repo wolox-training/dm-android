@@ -1,7 +1,5 @@
 package ar.com.wolox.android.training.utils;
 
-import android.util.Log;
-
 import ar.com.wolox.wolmo.core.di.scopes.ApplicationScope;
 import ar.com.wolox.wolmo.core.util.SharedPreferencesManager;
 
