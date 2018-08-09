@@ -1,12 +1,15 @@
 package ar.com.wolox.android.training.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
@@ -24,9 +27,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @BindView(R.id.fragment_login_email) TextView mEmail;
     @BindView(R.id.fragment_login_password) TextView mPassword;
+    @BindView(R.id.progressbar) ProgressBar mProgressBar;
 
     @Inject
-    public LoginFragment() {}
+    public LoginFragment() { }
 
     @Override
     public int layout() {
@@ -35,7 +39,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        mEmail.setText(getPresenter().getUserEmail());
+        if(getPresenter().getUserEmail() != null) {
+            goToHome();
+        }
     }
 
     public void goToHome() {
@@ -58,6 +64,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @OnClick(R.id.fragment_login_login)
     public void onLogin() {
+        startLoading();
+
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
@@ -65,6 +73,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
                                     && this.validateEmailField(email);
         if (validateErrors) {
             getPresenter().login(email, password);
+         } else {
+            completeLoading();
         }
     }
 
@@ -105,9 +115,11 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void onLoginError(ErrorCode errorCode) {
+        completeLoading();
         switch (errorCode) {
             case INVALID_CREDENTIALS:
-                mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+            case INERNET_CONNECTION_ERROR:
+                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -123,5 +135,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("https://www.wolox.com.ar/"));
         startActivity(intent);
+    }
+
+    public void startLoading() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void completeLoading() {
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 }

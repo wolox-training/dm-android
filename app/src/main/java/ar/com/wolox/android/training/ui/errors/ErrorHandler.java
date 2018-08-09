@@ -12,11 +12,11 @@ public class ErrorHandler {
             case INVALID_CREDENTIALS:
                 return "Usuario o clave incorrectos";
 
-            case CONNECTION_ERROR:
-                return "Error en la conexion";
+            case INERNET_CONNECTION_ERROR:
+                return "Error en la conexion a internet";
 
             default:
-                return "";
+                return "Unexpected error";
         }
     }
 }

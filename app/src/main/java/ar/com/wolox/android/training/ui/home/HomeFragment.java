@@ -23,6 +23,7 @@ public class HomeFragment extends WolmoFragment<HomePresenter> implements IHomeV
 
     @Override
     public void init() {
+        getPresenter().validateLogin(getActivity());
     }
 
     @Override
