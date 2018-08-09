@@ -43,12 +43,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
             @Override
             public void onResponseFailed(ResponseBody responseBody, int code) {
-                getView().onLoginError(ErrorCode.CONNECTION_ERROR);
+                getView().onLoginError(ErrorCode.INERNET_CONNECTION_ERROR);
             }
 
             @Override
             public void onCallFailure(Throwable t) {
-                getView().onLoginError(ErrorCode.CONNECTION_ERROR);
+                getView().onLoginError(ErrorCode.INERNET_CONNECTION_ERROR);
             }
         });
     }

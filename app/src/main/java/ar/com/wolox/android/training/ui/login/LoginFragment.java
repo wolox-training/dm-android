@@ -1,8 +1,19 @@
 package ar.com.wolox.android.training.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.text.method.LinkMovementMethod;
+=======
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.ProgressBar;
+>>>>>>> 1bd9456... Loading and errors in login
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
@@ -29,9 +40,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     CustomButtonView mSignupBtn;
     @BindView(R.id.fragment_login_terms_conditions)
     TextView mTermsAndConditions;
+    @BindView(R.id.progressbar) ProgressBar mProgressBar;
 
     @Inject
-    public LoginFragment() {}
+    public LoginFragment() { }
 
     @Override
     public int layout() {
@@ -67,11 +79,15 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     public void onLogin() {
+        startLoading();
+
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
         if (this.validateEmailField(email) && this.validatePasswordField(password)) {
             getPresenter().login(email, password);
+         } else {
+            completeLoading();
         }
     }
 
@@ -112,9 +128,11 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void onLoginError(ErrorCode errorCode) {
+        completeLoading();
         switch (errorCode) {
             case INVALID_CREDENTIALS:
-                mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+            case INERNET_CONNECTION_ERROR:
+                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -122,5 +140,20 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void onSignup() {
         Intent intent = new Intent(getActivity(), SignupActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.fragment_login_terms_conditions)
+    public void onClickTermsAndConditions() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.wolox.com.ar/"));
+        startActivity(intent);
+    }
+
+    public void startLoading() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void completeLoading() {
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 }
