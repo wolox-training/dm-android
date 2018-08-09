@@ -5,11 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import ar.com.wolox.android.R;
+import ar.com.wolox.android.training.ui.errors.ErrorCode;
+import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.signup.SignupActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
@@ -34,9 +35,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        if (getPresenter().isUserLoged()) {
-            goToHome();
-        }
+        mEmail.setText(getPresenter().getUserEmail());
     }
 
     public void goToHome() {
@@ -58,7 +57,43 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @OnClick(R.id.fragment_login_login)
     public void onLogin() {
-        getPresenter().login(mEmail.getText().toString(), mPassword.getText().toString());
+        String email = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
+        ErrorCode errorCode;
+
+        if ((errorCode = this.validateEmailField(email)) != null) {
+            mEmail.setError(ErrorHandler.getErrorMessage(errorCode));
+        } else if ((errorCode = this.validatePasswordField(password)) != null) {
+            mPassword.setError(ErrorHandler.getErrorMessage(errorCode));
+        } else {
+            getPresenter().login(email, password);
+        }
+    }
+
+    private ErrorCode validateEmailField(String email) {
+        if (!this.validateEmptyField(email)) {
+            return ErrorCode.EMPTY_FIELDS;
+        } else if (!this.validateEmail(email)) {
+            return ErrorCode.INVALID_EMAIL;
+        }
+
+        return null;
+    }
+
+    public ErrorCode validatePasswordField(String password) {
+        if (!this.validateEmptyField(password)) {
+            return ErrorCode.EMPTY_FIELDS;
+        }
+
+        return null;
+    }
+
+    private Boolean validateEmptyField(String field) {
+        return field.length() > 0;
+    }
+
+    private Boolean validateEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     @Override

@@ -32,8 +32,4 @@ public class UserSession {
         }
         return mEmail;
     }
-
-    public boolean isLoged() {
-        return getEmail() != null;
-    }
 }
