@@ -25,11 +25,6 @@ public class RandomPresenter extends BasePresenter<IRandomView> {
         mUserSession = userSession;
     }
 
-    @Override
-    public void onViewAttached() {
-        //getView().setUsername(mUserSession.getUsername());
-    }
-
     public int generateRandomNumber() {
 
         // Do some backend logic here, in this case generate just some random number
