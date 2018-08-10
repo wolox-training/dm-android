@@ -1,6 +1,9 @@
 package ar.com.wolox.android.training.ui.viewpager.fragment;
 
-import android.support.v4.util.Pair;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 
@@ -33,9 +36,11 @@ public class ViewPagerFragment extends WolmoFragment {
 
     @Override
     public void init() {
-        mFragmentPagerAdapter.addFragments(new Pair<>(mPage1Fragment, "Page 1"),
-                new Pair<>(mPage2Fragment, "Page 2"));
 
-        mViewPager.setAdapter(mFragmentPagerAdapter);
+
+//        mFragmentPagerAdapter.addFragments(new Pair<>(mPage1Fragment, "Page 1"),
+//                new Pair<>(mPage2Fragment, "Page 2"));
+//
+//        mViewPager.setAdapter(mFragmentPagerAdapter);
     }
 }
