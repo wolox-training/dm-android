@@ -7,8 +7,9 @@ import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 import javax.inject.Inject;
 
 import dagger.Lazy;
+import android.support.v7.app.ActionBar;
 
-public class ViewpagerActivity extends WolmoActivity {
+public class ViewpagerActivity extends WolmoActivity  {
 
     // Lazy example, a lazy injection does not build the dependencies until #get() is called
     @Inject Lazy<ViewPagerFragment> mLazyViewpagerFragment;
