@@ -36,16 +36,6 @@ public class TrainingFragment extends WolmoFragment<LoginPresenter> implements I
         mPassword.setText(getPresenter().getPassword());
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @OnClick(R.id.fragment_login_login)
     public void onLogin() {
         getPresenter().login(mEmail.getText().toString(), mPassword.getText().toString());
