@@ -1,6 +1,5 @@
 package ar.com.wolox.android.training.ui.login;
 
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.TextView;
 
@@ -26,10 +25,6 @@ public class LoginFragmentTest {
     private LoginActivity mLoginActivity;
     private TextView mEmail;
     private TextView mPassword;
-
-    @Rule
-    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
-
 
     @Before
     @SuppressWarnings("unchecked")

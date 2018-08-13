@@ -16,7 +16,6 @@ import ar.com.wolox.android.training.ui.errors.ErrorCode;
 import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.signup.SignupActivity;
-import ar.com.wolox.android.training.ui.viewpager.ViewpagerActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 import javax.inject.Inject;
@@ -46,7 +45,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     public void goToHome() {
-        Intent intent = new Intent(getActivity(), ViewpagerActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         getActivity().finish();
