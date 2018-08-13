@@ -19,12 +19,14 @@ android {
 
     defaultConfig {
         applicationId "ar.com.wolox.android.example"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0.0"
 
         setProperty("archivesBaseName", "WoloxApp-$versionName") // Generated APK file name
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -94,6 +96,8 @@ buildscript {
     ext.powermock_version = '1.7.0'
     ext.retrofit_version = '2.4.0'
     ext.espresso_version = '3.0.2'
+    ext.runner_version = "1.0.2"
+    ext.rules_version = "1.0.2"
 }
 
 dependencies {
@@ -128,5 +132,11 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:2.13.0"
     testImplementation "org.assertj:assertj-core:3.9.0"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
-    testImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+
+    androidTestImplementation "com.android.support.test:runner:$runner_version"
+    androidTestImplementation "com.android.support.test:rules:$rules_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    implementation 'com.android.support:support-annotations:27.1.1'
 }

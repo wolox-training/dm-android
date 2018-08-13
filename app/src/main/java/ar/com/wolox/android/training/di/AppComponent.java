@@ -3,7 +3,8 @@ package ar.com.wolox.android.training.di;
 import android.app.Application;
 
 import ar.com.wolox.android.training.TrainingApplication;
-import ar.com.wolox.android.training.ui.viewpager.ViewPagerActivityModule;
+import ar.com.wolox.android.training.ui.home.HomeActivityModule;
+import ar.com.wolox.android.training.ui.home.fragment.HomeFragmentModule;
 import ar.com.wolox.wolmo.core.di.modules.ContextModule;
 import ar.com.wolox.wolmo.core.di.modules.DefaultModule;
 import ar.com.wolox.wolmo.core.di.scopes.ApplicationScope;
@@ -17,7 +18,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @ApplicationScope
 @Component(dependencies = {NetworkingComponent.class},
            modules = { AndroidSupportInjectionModule.class, DefaultModule.class,
-                   ContextModule.class, AppModule.class, ViewPagerActivityModule.class})
+                   ContextModule.class, AppModule.class, HomeActivityModule.class})
 public interface AppComponent extends AndroidInjector<TrainingApplication> {
 
     @Component.Builder

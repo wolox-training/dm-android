@@ -25,10 +25,6 @@
         </activity>
 
         <activity
-            android:name=".training.ui.viewpager.ViewpagerActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".training.ui.home.HomeActivity"
             android:screenOrientation="portrait" />
 

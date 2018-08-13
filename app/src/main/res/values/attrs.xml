@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="ToolbarView">
+        <attr name="titleText" format="string"></attr>
+    </declare-styleable>
+</resources>
