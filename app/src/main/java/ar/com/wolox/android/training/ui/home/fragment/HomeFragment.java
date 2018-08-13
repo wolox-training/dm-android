@@ -37,10 +37,13 @@ public class HomeFragment extends WolmoFragment<NewsPresenter> implements INewsV
         mFragmentPagerAdapter.addFragments(
                 new Pair<>(mNewsFragment, getString(R.string.tab_news)),
                 new Pair<>(mProfileFragment, getString(R.string.tab_profile))
+
         );
 
         mViewPager.setAdapter(mFragmentPagerAdapter);
 
         mTabs.setupWithViewPager(mViewPager);
+        mTabs.getTabAt(0).setIcon(R.drawable.ic_news_list);
+        mTabs.getTabAt(1).setIcon(R.drawable.ic_profile);
     }
 }
