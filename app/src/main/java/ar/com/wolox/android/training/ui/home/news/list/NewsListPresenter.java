@@ -1,4 +1,4 @@
-package ar.com.wolox.android.training.ui.home.news;
+package ar.com.wolox.android.training.ui.home.news.list;
 
 import javax.inject.Inject;
 

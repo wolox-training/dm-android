@@ -17,19 +17,9 @@ public class SignupFragment extends WolmoFragment<SignupPresenter> implements IS
 
     @Override
     public int layout() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_signup;
     }
 
     @Override
     public void init() { }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 }
