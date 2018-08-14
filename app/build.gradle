@@ -98,6 +98,7 @@ buildscript {
     ext.espresso_version = '3.0.2'
     ext.runner_version = "1.0.2"
     ext.rules_version = "1.0.2"
+    ext.fresco_version = "1.10.0"
 }
 
 dependencies {
@@ -126,6 +127,7 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.facebook.fresco:fresco:$fresco_version"
 
     // Testing dependencies
     testImplementation "junit:junit:4.12"

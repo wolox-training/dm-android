@@ -13,6 +13,7 @@ public class Extras {
     private Extras() {}
 
     public static class UserLogin {
+        public static final String ID = "id";
         public static final String EMAIL = "email";
     }
 }

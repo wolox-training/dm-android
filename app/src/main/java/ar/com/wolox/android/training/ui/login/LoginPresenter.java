@@ -35,6 +35,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
             public void onResponseSuccessful(final List<User> user) {
                 if (user.size() > 0) {
                     mUserSession.setEmail(user.get(0).getEmail());
+                    mUserSession.setId(user.get(0).getId());
                     getView().onLoginSuccess();
                 } else {
                     getView().onLoginError(ErrorCode.INVALID_CREDENTIALS);
