@@ -1,10 +1,10 @@
-package ar.com.wolox.android.training.ui.home.news;
+package ar.com.wolox.android.training.ui.home.news.list;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.model.News;
+import ar.com.wolox.android.training.ui.news.NewsFormActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
 
@@ -49,6 +50,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                goToForm();
             }
         });
 
@@ -149,5 +151,10 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     private void hideEmptyMessage() {
         mRecyclerView.setVisibility(View.VISIBLE);
         mEmpty.setVisibility(View.GONE);
+    }
+
+    private void goToForm() {
+        Intent intent = new Intent(getActivity(), NewsFormActivity.class);
+        startActivity(intent);
     }
 }

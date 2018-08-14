@@ -2,7 +2,8 @@ package ar.com.wolox.android.training.ui.home;
 
 import android.app.Activity;
 
-import ar.com.wolox.android.training.ui.home.news.NewsListFragment;
+import ar.com.wolox.android.training.ui.news.NewsFormFragment;
+import ar.com.wolox.android.training.ui.home.news.list.NewsListFragment;
 import ar.com.wolox.android.training.ui.home.profile.ProfileFragment;
 
 import dagger.Binds;
@@ -21,7 +22,7 @@ public abstract class HomeActivityModule {
     abstract AndroidInjector.Factory<? extends Activity> bindHomeActivityFactory(HomeActivitySubcomponent.Builder builder);
 
     @ContributesAndroidInjector
-    abstract NewsListFragment newsFragment();
+    abstract NewsListFragment newsListFragmentFragment();
 
     @ContributesAndroidInjector
     abstract ProfileFragment profileFragment();

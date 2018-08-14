@@ -5,6 +5,8 @@ import ar.com.wolox.android.training.ui.home.fragment.HomeFragment;
 import ar.com.wolox.android.training.ui.login.LoginActivity;
 import ar.com.wolox.android.training.ui.login.LoginFragment;
 
+import ar.com.wolox.android.training.ui.news.NewsFormActivity;
+import ar.com.wolox.android.training.ui.news.NewsFormFragment;
 import ar.com.wolox.android.training.ui.signup.SignupActivity;
 import ar.com.wolox.android.training.ui.signup.SignupFragment;
 import dagger.Module;
@@ -28,4 +30,12 @@ public abstract class AppModule {
 
     @ContributesAndroidInjector
     abstract SignupFragment signupFragment();
+
+    // News form
+
+    @ContributesAndroidInjector
+    abstract NewsFormActivity newsFormActivity();
+
+    @ContributesAndroidInjector
+    abstract NewsFormFragment newsFormFragment();
 }
