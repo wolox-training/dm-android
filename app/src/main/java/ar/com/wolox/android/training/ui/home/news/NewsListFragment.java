@@ -1,12 +1,14 @@
 package ar.com.wolox.android.training.ui.home.news;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.melnykov.fab.FloatingActionButton;
 
 import org.joda.time.DateTime;
 
@@ -21,11 +23,14 @@ import ar.com.wolox.android.training.model.News;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
 
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+
 public class NewsListFragment extends WolmoFragment<NewsListPresenter> implements INewsListView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.fragment_news_list_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_news_list_swipe_container) SwipeRefreshLayout mSwipeLayout;
     @BindView(R.id.fragment_news_list_fab) FloatingActionButton mFAB;
+    @BindView(R.id.fragment_news_list_empty) TextView mEmpty;
     private LinearLayoutManager mLayoutManager;
     private NewsListAdapter mNewsAdapter;
 
@@ -40,11 +45,42 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     public void init() {
         Fresco.initialize(getContext());
 
+        // FAB onClick
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        // Setting Recycler View
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // SwipeRefreshLayout
+        // Setting Recycler View on scroll hide FAB
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            int currentScrollPosition = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == SCROLL_STATE_IDLE) {
+                    if (currentScrollPosition > 100) {
+                        mFAB.animate().translationY(getView().getHeight());
+                    } else {
+                        mFAB.animate().translationY(0);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentScrollPosition += dy;
+            }
+        });
+
+        // Setting refresh on swipe
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 
@@ -55,11 +91,6 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
                 loadNews();
             }
         });
-
-        Log.d("DylanLog", "Esta aca");
-        mFAB.attachToRecyclerView(mRecyclerView);
-        mFAB.show();
-        Log.d("DylanLog", "PAso aca");
     }
 
     @Override
@@ -98,9 +129,25 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
             add(news2);
         }};
 
-        mNewsAdapter = new NewsListAdapter(dataSet, getPresenter());
-        mRecyclerView.setAdapter(mNewsAdapter);
+        if (dataSet.size() > 0) {
+            mNewsAdapter = new NewsListAdapter(dataSet, getPresenter());
+            mRecyclerView.setAdapter(mNewsAdapter);
+
+            hideEmptyMessage();
+        } else {
+            showEmptyMessage();
+        }
 
         mSwipeLayout.setRefreshing(false);
+    }
+
+    private void showEmptyMessage() {
+        mRecyclerView.setVisibility(View.GONE);
+        mEmpty.setVisibility(View.VISIBLE);
+    }
+
+    private void hideEmptyMessage() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mEmpty.setVisibility(View.GONE);
     }
 }

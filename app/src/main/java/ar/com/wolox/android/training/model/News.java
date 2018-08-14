@@ -42,7 +42,7 @@ public class News {
 
     public String getSince() {
         return (getSinceHours() > 0 ? String.valueOf(getSinceHours()) + "h " : "") +
-                (getSinceHours() == 0 || getSinceMinutes() > 0 ? String.valueOf(getSinceMinutes() % 60) + "m" : "");
+                (getSinceHours() == 0 || getSinceMinutes() % 60 > 0 ? String.valueOf(getSinceMinutes() % 60) + "m" : "");
     }
 
     public Integer getSinceHours() {
