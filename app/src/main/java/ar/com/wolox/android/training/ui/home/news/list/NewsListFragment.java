@@ -103,6 +103,21 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     public void loadNews() {
         mSwipeLayout.setRefreshing(true);
 
+        List<News> dataSet = getNews();
+
+        if (dataSet.size() > 0) {
+            mNewsAdapter = new NewsListAdapter(dataSet, getPresenter());
+            mRecyclerView.setAdapter(mNewsAdapter);
+
+            hideEmptyMessage();
+        } else {
+            showEmptyMessage();
+        }
+
+        mSwipeLayout.setRefreshing(false);
+    }
+
+    private List<News> getNews() {
         News news1 = new News();
         news1.setTitle("¿Famosos y sólo amigos?");
         news1.setPicture("http://bucket1.glanacion.com/anexos/fotos/70/dia-del-amigo-2236070w620.jpg");
@@ -130,17 +145,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
             add(news1);
             add(news2);
         }};
-
-        if (dataSet.size() > 0) {
-            mNewsAdapter = new NewsListAdapter(dataSet, getPresenter());
-            mRecyclerView.setAdapter(mNewsAdapter);
-
-            hideEmptyMessage();
-        } else {
-            showEmptyMessage();
-        }
-
-        mSwipeLayout.setRefreshing(false);
+        return dataSet;
     }
 
     private void showEmptyMessage() {
