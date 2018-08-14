@@ -1,21 +1,18 @@
 package ar.com.wolox.android.training.ui.home.news;
 
-import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.joda.time.DateTime;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.inject.Inject;
 
@@ -28,6 +25,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
 
     @BindView(R.id.fragment_news_list_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.fragment_news_list_swipe_container) SwipeRefreshLayout mSwipeLayout;
+    @BindView(R.id.fragment_news_list_fab) FloatingActionButton mFAB;
     private LinearLayoutManager mLayoutManager;
     private NewsListAdapter mNewsAdapter;
 
@@ -50,10 +48,6 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 
-        /**
-         * Showing Swipe Refresh animation on activity create
-         * As animation won't start on onCreate, post runnable is used
-         */
         mSwipeLayout.post(new Runnable() {
 
             @Override
@@ -61,6 +55,11 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
                 loadNews();
             }
         });
+
+        Log.d("DylanLog", "Esta aca");
+        mFAB.attachToRecyclerView(mRecyclerView);
+        mFAB.show();
+        Log.d("DylanLog", "PAso aca");
     }
 
     @Override
