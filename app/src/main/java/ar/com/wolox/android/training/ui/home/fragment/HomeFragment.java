@@ -15,7 +15,7 @@ import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
 
-public class HomeFragment extends WolmoFragment<NewsListPresenter> implements INewsListView {
+public class HomeFragment extends WolmoFragment {
 
     @BindView(R.id.fragment_home_pager) ViewPager mViewPager;
     @BindView(R.id.fragment_home_tabs) TabLayout mTabs;

@@ -22,6 +22,10 @@ public class News {
         this.likes = new ArrayList<>();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -41,6 +45,10 @@ public class News {
     }
 
     public String getSince() {
+        if (getCreatedAt() == null) {
+            return null;
+        }
+
         return (getSinceHours() > 0 ? String.valueOf(getSinceHours()) + "h " : "") +
                 (getSinceHours() == 0 || getSinceMinutes() % 60 > 0 ? String.valueOf(getSinceMinutes() % 60) + "m" : "");
     }
@@ -53,6 +61,10 @@ public class News {
     public Integer getSinceMinutes() {
         DateTime now = new DateTime();
         return Minutes.minutesBetween(getCreatedAt(), now).getMinutes();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
