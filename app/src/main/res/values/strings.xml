@@ -3,6 +3,14 @@
     <string name="tab_news">News</string>
     <string name="tab_profile">Profile</string>
 
+    <!-- Error -->
+    <string name="error_empty_fields">Todos los campos son obligatorios</string>
+    <string name="error_invalid_email">El email ingresado es incorrecto</string>
+    <string name="error_invalid_credentials">Usuario o clave incorrectos</string>
+    <string name="error_internet_connection_error">Error en la conexion a internet</string>
+    <string name="error_no_news">No hay noticias</string>
+    <string name="error_unexpected">Unexpected error</string>
+
     <!-- Login -->
     <string name="fragment_login_email">Email</string>
     <string name="fragment_login_password">Password</string>

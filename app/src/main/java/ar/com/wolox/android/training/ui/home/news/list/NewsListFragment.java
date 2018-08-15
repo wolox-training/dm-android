@@ -7,19 +7,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.model.News;
+import ar.com.wolox.android.training.ui.errors.ErrorCode;
+import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.news.NewsFormActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
@@ -34,6 +34,14 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     @BindView(R.id.fragment_news_list_empty) TextView mEmpty;
     private LinearLayoutManager mLayoutManager;
     private NewsListAdapter mNewsAdapter;
+    private List<News> mAllNews;
+
+    // Paging
+    private final static int PAGE_SIZE = 10;
+    private final static int LOAD_BEFORE_N_NEWS = 2;
+    private Integer page = 1;
+    private Boolean isLoading = false;
+    private Boolean isLastPage = false;
 
     @Inject public NewsListFragment() { }
 
@@ -44,6 +52,8 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
 
     @Override
     public void init() {
+        // Initializing
+        mAllNews = new ArrayList<>();
         Fresco.initialize(getContext());
 
         // FAB onClick
@@ -58,94 +68,79 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mNewsAdapter = new NewsListAdapter(mAllNews, getPresenter());
+        mRecyclerView.setAdapter(mNewsAdapter);
 
         // Setting Recycler View on scroll hide FAB
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
-            int currentScrollPosition = 0;
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == SCROLL_STATE_IDLE) {
-                    if (currentScrollPosition > 100) {
-                        mFAB.animate().translationY(getView().getHeight());
-                    } else {
-                        mFAB.animate().translationY(0);
-                    }
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                currentScrollPosition += dy;
-            }
-        });
+        mRecyclerView.addOnScrollListener(onScrollListener);
 
         // Setting refresh on swipe
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 
         mSwipeLayout.post(new Runnable() {
-
             @Override
             public void run() {
+                startLoading();
                 loadNews();
             }
         });
     }
 
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        int currentScrollPosition = 0;
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == SCROLL_STATE_IDLE) {
+                if (currentScrollPosition > 100) {
+                    mFAB.animate().translationY(getView().getHeight());
+                } else {
+                    mFAB.animate().translationY(0);
+                }
+            }
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            currentScrollPosition += dy;
+
+            int visibleItemCount = mLayoutManager.getChildCount();
+            int totalItemCount = mLayoutManager.getItemCount();
+            int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+
+            if (!isLoading && !isLastPage) {
+                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount - LOAD_BEFORE_N_NEWS
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE) {
+                    loadNews();
+                }
+            }
+        }
+    };
+
     @Override
     public void onRefresh() {
-        loadNews();
+        startLoading();
+        getPresenter().getLastNews(mAllNews.size() > 0 ? mAllNews.get(0).getId() : null, PAGE_SIZE);
     }
 
     public void loadNews() {
-        mSwipeLayout.setRefreshing(true);
-
-        List<News> dataSet = getNews();
-
-        if (dataSet.size() > 0) {
-            mNewsAdapter = new NewsListAdapter(dataSet, getPresenter());
-            mRecyclerView.setAdapter(mNewsAdapter);
-
-            hideEmptyMessage();
-        } else {
-            showEmptyMessage();
-        }
-
-        mSwipeLayout.setRefreshing(false);
+        isLoading = true;
+        getPresenter().getNews(page, PAGE_SIZE);
+        page++;
     }
 
-    private List<News> getNews() {
-        News news1 = new News();
-        news1.setTitle("¿Famosos y sólo amigos?");
-        news1.setPicture("http://bucket1.glanacion.com/anexos/fotos/70/dia-del-amigo-2236070w620.jpg");
-        news1.setText("Ser súper estrellas e íntimos amigos tiene sus desventajas, al menos para George. Su esposa, Amal, es muy celosa de Julia e irrumpió varias veces en las grabaciones de su última peli juntos, aunque nunca pescó nada raro.");
-        news1.setCreatedAt(new DateTime(2018, 8, 14, 10, 59));
-        news1.setLikes(Arrays.asList(1, 3));
+    private void startLoading() {
+        mSwipeLayout.setRefreshing(true);
+        isLoading = true;
+    }
 
-        News news2 = new News();
-        news2.setTitle("Hipnosis: la nueva vedette de las neurociencias");
-        news2.setPicture("http://bucket1.glanacion.com/anexos/fotos/50/2082050.jpg");
-        news2.setText("Hace un año, Marisa Bello, bibliotecóloga de La Plata, separada, 51 años, condujo un auto ultralujoso. Luego, durmió profundamente. Más tarde, se rió a carcajadas y olió un perfume indescriptible. Todo eso lo vivió desde una silla, apostada en el escenario de un pabellón de Tecnópolis. Para ella, sucedió durante una hora. \\\"En realidad, estuvo entre dieciséis y dieciocho minutos, que es el tiempo máximo que utilizamos durante nuestros espectáculos para hipnotizar a la gente -explica Gonzalo Blanc, un abogado de 41 años-. Pero la percepción del tiempo en ese estado es otra, y eso la llevó a sentir la experiencia mucho más larga\\\". Durante dieciséis presentaciones en Tecnópolis, Gonzalo, junto con el médico Daniel West, de 30 años, practicaron hipnosis colectiva sobre el público. Los dos viven en Montevideo y se dedican desde hace más de diez años a investigar las neurociencias. Dan seminarios, conferencias y talleres empresariales para mejorar el rendimiento a través de la hipnosis -tuvieron clientes como YPF, Telefónica, L'Oréal y Santillana-; practican hipnosis clínica para atenuar el dolor y curar patologías, y sus conferencias en TEDx Durazno y en TEDx Río de la Plata, llamadas \\\"¿Se puede entrenar a la mente para ser exitosos?\\\", tienen más de 150.000 reproducciones.");
-        news2.setCreatedAt(new DateTime(2018, 8, 13, 23, 12));
-
-        List<News> dataSet = new ArrayList<News>() {{
-            add(news1);
-            add(news2);
-            add(news1);
-            add(news2);
-            add(news1);
-            add(news2);
-            add(news1);
-            add(news2);
-            add(news1);
-            add(news2);
-            add(news1);
-            add(news2);
-        }};
-        return dataSet;
+    public void completeLoading() {
+        mSwipeLayout.setRefreshing(false);
+        isLoading = false;
     }
 
     private void showEmptyMessage() {
@@ -161,5 +156,40 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     private void goToForm() {
         Intent intent = new Intent(getActivity(), NewsFormActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onGetNewsError(ErrorCode errorCode) {
+        completeLoading();
+        switch (errorCode) {
+            case NO_NEWS:
+                showEmptyMessage();
+                break;
+
+            default:
+                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
+                break;
+        }
+    }
+
+    @Override
+    public void onGetNewsSuccess(List<News> news) {
+        mAllNews.addAll(news);
+        mNewsAdapter.notifyDataSetChanged();
+        hideEmptyMessage();
+        completeLoading();
+    }
+
+    @Override
+    public void onGetNewsLastPage() {
+        isLastPage = true;
+    }
+
+    @Override
+    public void onGetLastNewsSuccess(List<News> news) {
+        mAllNews.addAll(0, news);
+        mNewsAdapter.notifyDataSetChanged();
+        hideEmptyMessage();
+        completeLoading();
     }
 }
