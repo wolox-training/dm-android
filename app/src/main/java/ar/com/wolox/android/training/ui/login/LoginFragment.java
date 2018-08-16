@@ -1,17 +1,10 @@
 package ar.com.wolox.android.training.ui.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.text.method.LinkMovementMethod;
-=======
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ProgressBar;
->>>>>>> 1bd9456... Loading and errors in login
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +33,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     CustomButtonView mSignupBtn;
     @BindView(R.id.fragment_login_terms_conditions)
     TextView mTermsAndConditions;
-    @BindView(R.id.progressbar) ProgressBar mProgressBar;
+    @BindView(R.id.progressbar)
+    ProgressBar mProgressBar;
 
     @Inject
-    public LoginFragment() { }
+    public LoginFragment() {
+    }
 
     @Override
     public int layout() {
@@ -86,7 +81,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
         if (this.validateEmailField(email) && this.validatePasswordField(password)) {
             getPresenter().login(email, password);
-         } else {
+        } else {
             completeLoading();
         }
     }
