@@ -29,7 +29,7 @@ public class ErrorHandler {
                 break;
 
             default:
-                code= R.string.error_unexpected;
+                code = R.string.error_unexpected;
                 break;
         }
 
