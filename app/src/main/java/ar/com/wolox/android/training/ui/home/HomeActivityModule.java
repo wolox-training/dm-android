@@ -2,8 +2,7 @@ package ar.com.wolox.android.training.ui.home;
 
 import android.app.Activity;
 
-import ar.com.wolox.android.training.ui.news.NewsFormFragment;
-import ar.com.wolox.android.training.ui.home.news.list.NewsListFragment;
+import ar.com.wolox.android.training.ui.news.list.NewsListFragment;
 import ar.com.wolox.android.training.ui.home.profile.ProfileFragment;
 
 import dagger.Binds;

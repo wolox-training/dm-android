@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="ToolbarView">
         <attr name="titleText" format="string"></attr>
+        <attr name="imageResource" format="reference"></attr>
     </declare-styleable>
 </resources>

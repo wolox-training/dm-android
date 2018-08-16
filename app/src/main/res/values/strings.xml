@@ -24,4 +24,5 @@
 
     <!-- News -->
     <string name="no_news">There is no news</string>
+    <string name="news_details_toolbar_title">Post</string>
 </resources>

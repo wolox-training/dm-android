@@ -1,4 +1,4 @@
-package ar.com.wolox.android.training.ui.news;
+package ar.com.wolox.android.training.ui.news.form;
 
 import javax.inject.Inject;
 
@@ -12,7 +12,7 @@ public class NewsFormFragment extends WolmoFragment<NewsFormPresenter> implement
 
     @Override
     public int layout() {
-        return R.layout.fragment_home_news_form;
+        return R.layout.fragment_news_form;
     }
 
     @Override

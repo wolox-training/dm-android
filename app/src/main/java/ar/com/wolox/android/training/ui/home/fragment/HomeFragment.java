@@ -7,9 +7,7 @@ import android.support.v4.view.ViewPager;
 import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
-import ar.com.wolox.android.training.ui.home.news.list.INewsListView;
-import ar.com.wolox.android.training.ui.home.news.list.NewsListFragment;
-import ar.com.wolox.android.training.ui.home.news.list.NewsListPresenter;
+import ar.com.wolox.android.training.ui.news.list.NewsListFragment;
 import ar.com.wolox.android.training.ui.home.profile.ProfileFragment;
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
