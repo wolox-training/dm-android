@@ -14,14 +14,16 @@ public class UserSession {
     private String mEmail;
     private String mPassword;
 
+    private static final String USER_EMAIL = "ar.com.wolox.android.training.USER_EMAIL";
+
     @Inject
     public UserSession(SharedPreferencesManager sharedPreferencesManager) {
         mSharedPreferencesManager = sharedPreferencesManager;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         mEmail = email;
-        mSharedPreferencesManager.store(Extras.UserLogin.EMAIL, email);
+        mSharedPreferencesManager.store(USER_EMAIL, email);
     }
 
     public String getEmail() {
@@ -29,12 +31,8 @@ public class UserSession {
         // application, but we should add a check in case Android decides to kill the application
         // and return to a state where this isn't initialized.
         if (mEmail == null) {
-            mEmail = mSharedPreferencesManager.get(Extras.UserLogin.EMAIL, null);
+            mEmail = mSharedPreferencesManager.get(USER_EMAIL, null);
         }
         return mEmail;
-    }
-
-    public void setUser(String email) {
-        this.setEmail(email);
     }
 }

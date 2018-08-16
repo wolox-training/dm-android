@@ -20,7 +20,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     public void login(String email, String password) {
-        mUserSession.setUser(email);
+        mUserSession.setEmail(email);
         getView().onLoginSuccess();
     }
 
