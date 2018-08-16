@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="80dp"
+    android:layout_height="@dimen/news_list_item_height"
     xmlns:fresco="http://schemas.android.com/tools"
     android:background="@drawable/border_bottom"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp" >
+    android:padding="@dimen/spacing_large">
 
     <!-- icon -->
 
@@ -30,14 +27,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
-            android:textSize="16sp" />
+            android:textSize="@dimen/font_medium_extra" />
 
         <TextView
             android:id="@+id/fragment_news_list_item_description"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/light_gray"
-            android:textSize="14sp" />
+            android:textSize="@dimen/font_medium_more" />
     </LinearLayout>
 
     <RelativeLayout
@@ -52,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/light_gray"
-            android:textSize="12sp"
+            android:textSize="@dimen/font_medium"
             android:textAlignment="viewEnd"/>
 
         <ImageButton

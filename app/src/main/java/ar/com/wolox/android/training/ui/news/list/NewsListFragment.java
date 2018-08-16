@@ -79,12 +79,9 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
 
-        mSwipeLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                startLoading();
-                loadNews();
-            }
+        mSwipeLayout.post(() -> {
+            startLoading();
+            loadNews();
         });
     }
 
