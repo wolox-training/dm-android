@@ -3,6 +3,7 @@ package ar.com.wolox.android.training.ui.news.list;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +44,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
 
             // Setting onClick item
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(v.getContext(), NewsDetailsActivity.class);
-                    v.getContext().startActivity(intent);
-                    EventBus.getDefault().post(mDataset.get(getAdapterPosition()));
-                }
+            v.setOnClickListener(view -> {
+                Intent intent = new Intent(v.getContext(), NewsDetailsActivity.class);
+                intent.putExtra(NewsDetailsActivity.NEWS_OBJECT, mDataset.get(getAdapterPosition()));
+                v.getContext().startActivity(intent);
             });
         }
     }

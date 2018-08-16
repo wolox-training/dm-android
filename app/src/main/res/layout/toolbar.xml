@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="48dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:layout_scrollFlags="scroll|enterAlways">
 
@@ -19,17 +19,17 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="4dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="4dp" />
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_marginRight="?attr/actionBarSize"
+            android:layout_marginEnd="?attr/actionBarSize"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:textSize="20dp"
+            android:textSize="@dimen/font_large_extra"
             android:textStyle="bold"
             android:textColor="@color/black"/>
     </LinearLayout>

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -23,13 +24,20 @@ import butterknife.BindView;
 
 public class NewsDetailsFragment extends WolmoFragment<NewsDetailsPresenter> implements INewsDetailsView {
 
-    @BindView(R.id.fragment_news_details_header_image) SimpleDraweeView mImageView;
-    @BindView(R.id.fragment_news_details_title) TextView mTitle;
-    @BindView(R.id.fragment_news_details_since) TextView mSince;
-    @BindView(R.id.fragment_news_details_text) TextView mText;
+    @BindView(R.id.fragment_news_details_header_image)
+    SimpleDraweeView mImageView;
+    @BindView(R.id.fragment_news_details_title)
+    TextView mTitle;
+    @BindView(R.id.fragment_news_details_since)
+    TextView mSince;
+    @BindView(R.id.fragment_news_details_text)
+    TextView mText;
+    @BindView(R.id.fragment_news_details_like)
+    ImageView mLike;
 
     @Inject
-    public NewsDetailsFragment() {}
+    public NewsDetailsFragment() {
+    }
 
     @Override
     public int layout() {
@@ -38,27 +46,20 @@ public class NewsDetailsFragment extends WolmoFragment<NewsDetailsPresenter> imp
 
     @Override
     public void init() {
-        final ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse("http://static.t13.cl/images/sizes/1200x675/1422252010_riquelme.jpg")).build();
+        if (!getActivity().getIntent().hasExtra(NewsDetailsActivity.NEWS_OBJECT)) {
+            Toast.makeText(getContext(), R.string.error_unexpected, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        setNews((News) getActivity().getIntent().getSerializableExtra(NewsDetailsActivity.NEWS_OBJECT));
+    }
+
+    private void setNews(News news) {
+        final ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(news.getPicture())).build();
         mImageView.setImageRequest(imageRequest);
-        mTitle.setText("Titulo");
-        mSince.setText("4h");
-        mText.setText(".asdasdsadaskjdsakd sdask dkasjkd asjd asd kjdl as djasd klasd aiojas k");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe
-    public void onNews(News news) {
-        Log.d("DylanLog", news.toString());
+        mTitle.setText(news.getTitle());
+        mSince.setText(news.getSince());
+        mText.setText(news.getText());
+        mLike.setImageResource(news.isLikedByUser(getPresenter().getUserId()) ? R.drawable.ic_like_default_on : R.drawable.ic_like_default_off);
     }
 }

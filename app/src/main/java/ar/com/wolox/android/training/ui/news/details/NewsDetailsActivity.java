@@ -10,6 +10,7 @@ public class NewsDetailsActivity extends WolmoActivity {
 
     @Inject
     NewsDetailsFragment mNewsDetailsFragment;
+    public static final String NEWS_OBJECT = "ar.com.wolox.android.training.NEWS_OBJECT";
 
     @Override
     protected int layout() {

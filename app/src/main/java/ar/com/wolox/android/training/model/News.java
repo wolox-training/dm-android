@@ -1,18 +1,18 @@
 package ar.com.wolox.android.training.model;
 
-import android.util.Log;
-
-import org.joda.time.DateTime;
 import org.joda.time.Hours;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Minutes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class News {
+public class News implements Serializable {
     private Integer id;
     private Integer userId;
-    private DateTime createdAt;
+    private LocalDateTime createdAt;
     private String title;
     private String picture;
     private String text;
@@ -36,7 +36,7 @@ public class News {
         return text;
     }
 
-    public DateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -54,12 +54,12 @@ public class News {
     }
 
     public Integer getSinceHours() {
-        DateTime now = new DateTime();
+        LocalDate now = new LocalDate();
         return Hours.hoursBetween(getCreatedAt(), now).getHours();
     }
 
     public Integer getSinceMinutes() {
-        DateTime now = new DateTime();
+        LocalDate now = new LocalDate();
         return Minutes.minutesBetween(getCreatedAt(), now).getMinutes();
     }
 
@@ -79,7 +79,7 @@ public class News {
         this.text = text;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

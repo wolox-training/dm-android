@@ -45,5 +45,6 @@
     <dimen name="font_big">22sp</dimen>
     <dimen name="font_huge">24sp</dimen>
 
-    <!-- Add your custom dimens here -->
+    <!-- News -->
+    <dimen name="news_list_item_height">88dp</dimen>
 </resources>
