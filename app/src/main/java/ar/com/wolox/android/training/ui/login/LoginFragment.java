@@ -65,36 +65,31 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mSignupBtn.setOnClickListener(v -> onSignup());
     }
 
-
     public void onLogin() {
-        Log.d("DylanLog", "PRUEBA");
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
-        Boolean validateErrors = this.validateEmptyFields(email, password)
-                && this.validateEmailField(email);
-        if (validateErrors) {
+        if (this.validateEmailField(email) && this.validatePasswordField(password)) {
             getPresenter().login(email, password);
         }
     }
 
-
-    private Boolean validateEmptyFields(String email, String password) {
-
+    public Boolean validateEmailField(String email) {
         if (!this.validateEmptyField(email)) {
             mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
             return false;
-        } else if (!this.validateEmptyField(password)) {
-            mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+        } else if (!this.validateEmail(email)) {
+            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.INVALID_EMAIL));
             return false;
         }
 
         return true;
     }
 
-    public Boolean validateEmailField(String email) {
-        if (!this.validateEmail(email)) {
-            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.INVALID_EMAIL));
+    private Boolean validatePasswordField(String password) {
+
+        if (!this.validateEmptyField(password)) {
+            mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
             return false;
         }
 
