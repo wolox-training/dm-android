@@ -2,31 +2,38 @@ package ar.com.wolox.android.training.ui.login;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.View;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.widget.TextView;
+
+import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
 import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.signup.SignupActivity;
+import ar.com.wolox.android.training.ui.views.CustomButtonView;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
-    @BindView(R.id.fragment_login_email) TextView mEmail;
-    @BindView(R.id.fragment_login_password) TextView mPassword;
+    @BindView(R.id.fragment_login_email)
+    TextView mEmail;
+    @BindView(R.id.fragment_login_password)
+    TextView mPassword;
+    @BindView(R.id.fragment_login_login)
+    CustomButtonView mLoginBtn;
+    @BindView(R.id.fragment_login_signup)
+    CustomButtonView mSignupBtn;
+    @BindView(R.id.fragment_login_terms_conditions)
+    TextView mTermsAndConditions;
 
     @Inject
-    public LoginFragment() {}
+    public LoginFragment() {
+    }
 
     @Override
     public int layout() {
@@ -36,6 +43,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void init() {
         mEmail.setText(getPresenter().getUserEmail());
+        mLoginBtn.setText(R.string.login_login_btn_text);
+        mLoginBtn.setColor(R.color.white);
+        mSignupBtn.setText(R.string.login_signup_btn_text);
+        mSignupBtn.setTextColor(R.color.white);
+        mSignupBtn.setColor(R.color.colorPrimary);
+        mTermsAndConditions.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public void goToHome() {
@@ -45,17 +58,26 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         getActivity().finish();
     }
 
-    @OnClick(R.id.fragment_login_login)
+    @Override
+    public void setListeners() {
+        super.setListeners();
+        mLoginBtn.setOnClickListener(v -> onLogin());
+        mSignupBtn.setOnClickListener(v -> onSignup());
+    }
+
+
     public void onLogin() {
+        Log.d("DylanLog", "PRUEBA");
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
-        Boolean validateErrors =    this.validateEmptyFields(email, password)
-                                    && this.validateEmailField(email);
+        Boolean validateErrors = this.validateEmptyFields(email, password)
+                && this.validateEmailField(email);
         if (validateErrors) {
             getPresenter().login(email, password);
         }
     }
+
 
     private Boolean validateEmptyFields(String email, String password) {
 
@@ -102,16 +124,8 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mPassword.setError(error);
     }
 
-    @OnClick(R.id.fragment_login_signup)
-    public void onClickSignup() {
+    public void onSignup() {
         Intent intent = new Intent(getActivity(), SignupActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.fragment_login_terms_conditions)
-    public void onClickTermsAndConditions() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.wolox.com.ar/"));
         startActivity(intent);
     }
 }
