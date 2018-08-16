@@ -1,13 +1,8 @@
-package ar.com.wolox.android.training.ui.home.news.list;
+package ar.com.wolox.android.training.ui.news.list;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;

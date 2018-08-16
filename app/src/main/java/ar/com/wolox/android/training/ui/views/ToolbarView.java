@@ -1,6 +1,7 @@
 package ar.com.wolox.android.training.ui.views;
 
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 import android.content.Context;
@@ -12,16 +13,16 @@ import ar.com.wolox.android.R;
 public class ToolbarView extends Toolbar {
 
     private String mTitle;
+    private int mImageResource;
 
     public ToolbarView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //get the attributes specified in attrs.xml using the name we included
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ToolbarView, 0, 0);
 
         try {
-            //get the text and colors specified using the names in attrs.xml
             mTitle = attributes.getString(R.styleable.ToolbarView_titleText);
+            mImageResource = attributes.getResourceId(R.styleable.ToolbarView_imageResource, -1);
         } finally {
             attributes.recycle();
         }
@@ -33,9 +34,14 @@ public class ToolbarView extends Toolbar {
         this.setContentInsetsAbsolute(0, 0);
         inflate(getContext(), R.layout.toolbar, this);
         setToolbarTitle(mTitle);
+        setImageResource(mImageResource);
     }
 
     public void setToolbarTitle(String title) {
         ((TextView) findViewById(R.id.toolbar_title)).setText(title);
+    }
+
+    public void setImageResource(int imageResource) {
+        ((ImageView) findViewById(R.id.toolbar_image)).setImageResource(imageResource);
     }
 }

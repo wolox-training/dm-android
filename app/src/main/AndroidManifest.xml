@@ -33,7 +33,11 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".training.ui.news.NewsFormActivity"
+            android:name=".training.ui.news.form.NewsFormActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".training.ui.news.details.NewsDetailsActivity"
             android:screenOrientation="portrait" />
 
     </application>

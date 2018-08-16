@@ -1,10 +1,9 @@
-package ar.com.wolox.android.training.ui.news;
+package ar.com.wolox.android.training.ui.news.form;
 
 
 import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
-import ar.com.wolox.android.training.ui.signup.SignupFragment;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
 public class NewsFormActivity extends WolmoActivity {

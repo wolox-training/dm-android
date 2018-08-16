@@ -1,4 +1,4 @@
-package ar.com.wolox.android.training.ui.home.news.list;
+package ar.com.wolox.android.training.ui.news.list;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -20,7 +20,7 @@ import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.model.News;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
 import ar.com.wolox.android.training.ui.errors.ErrorHandler;
-import ar.com.wolox.android.training.ui.news.NewsFormActivity;
+import ar.com.wolox.android.training.ui.news.form.NewsFormActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
 
@@ -47,7 +47,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
 
     @Override
     public int layout() {
-        return R.layout.fragment_home_news_list;
+        return R.layout.fragment_news_list;
     }
 
     @Override
@@ -65,10 +65,11 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         });
 
         // Setting Recycler View
-        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
         mNewsAdapter = new NewsListAdapter(mAllNews, getPresenter());
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mNewsAdapter);
 
         // Setting Recycler View on scroll hide FAB
