@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="@dimen/login_logo_spacing_top"
             android:src="@drawable/wolox_logo_large"
             android:layout_gravity="center_horizontal|bottom"/>
     </FrameLayout>
