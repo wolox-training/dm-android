@@ -33,7 +33,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         mRetrofitServices.getService(UserService.class).login(email, password).enqueue(new NetworkCallback<List<User>>() {
             @Override
             public void onResponseSuccessful(final List<User> user) {
-                if (user.size() > 0) {
+                if (!user.isEmpty()) {
                     mUserSession.setEmail(user.get(0).getEmail());
                     getView().onLoginSuccess();
                 } else {

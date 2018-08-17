@@ -100,7 +100,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     public Boolean validateEmailField(String email) {
-        if (!this.validateEmptyField(email)) {
+        if (!email.isEmpty()) {
             mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
             return false;
         } else if (!this.validateEmail(email)) {
@@ -113,16 +113,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     private Boolean validatePasswordField(String password) {
 
-        if (!this.validateEmptyField(password)) {
+        if (!password.isEmpty()) {
             mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
             return false;
         }
 
         return true;
-    }
-
-    private Boolean validateEmptyField(String field) {
-        return field.length() > 0;
     }
 
     private Boolean validateEmail(String email) {
