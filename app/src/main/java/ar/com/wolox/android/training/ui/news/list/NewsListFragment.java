@@ -218,7 +218,6 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         EventBus.getDefault().unregister(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Subscribe
     public void onNewsLikeEvent(NewsLikeEvent event) {
         mNewsAdapter.onNewsLikeEvent(event);

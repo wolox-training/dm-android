@@ -82,10 +82,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         return mDataset.size();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void onNewsLikeEvent(NewsLikeEvent event) {
-        News news = mDataset.stream().filter(n -> n.getId().equals(event.getIdNews())).findFirst().get();
-        event.applyTo(news);
-        this.notifyItemChanged(mDataset.indexOf(news));
+        for (Integer i = 0; i < mDataset.size(); i++) {
+            if (mDataset.get(i).getId().equals(event.getIdNews())) {
+                event.applyTo(mDataset.get(i));
+                this.notifyItemChanged(i);
+            }
+        }
     }
 }
