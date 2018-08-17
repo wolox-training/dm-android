@@ -1,15 +1,14 @@
-package ar.com.wolox.android.training.ui.news.details;
-
+package ar.com.wolox.android.training.ui.fullscreen_image;
 
 import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
-public class NewsDetailsActivity extends WolmoActivity {
+public class FullScreenImageActivity extends WolmoActivity {
 
     @Inject
-    NewsDetailsFragment mNewsDetailsFragment;
+    FullScreenImageFragment mFullScreenImageFragment;
 
     @Override
     protected int layout() {
@@ -18,6 +17,6 @@ public class NewsDetailsActivity extends WolmoActivity {
 
     @Override
     protected void init() {
-        replaceFragment(R.id.activity_base_content, mNewsDetailsFragment);
+        replaceFragment(R.id.activity_base_content, mFullScreenImageFragment);
     }
 }

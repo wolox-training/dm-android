@@ -63,31 +63,15 @@ public class News implements Serializable {
         return Minutes.minutesBetween(getCreatedAt(), now).getMinutes();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setLikes(List<Integer> likes) {
-        this.likes = likes;
-    }
-
     public Boolean isLikedByUser(Integer userId) {
         return getLikes().contains(userId);
+    }
+
+    public void userDislike(Integer userDislikeId) {
+        likes.remove(userDislikeId);
+    }
+
+    public void userLike(Integer userLikeId) {
+        likes.add(userLikeId);
     }
 }

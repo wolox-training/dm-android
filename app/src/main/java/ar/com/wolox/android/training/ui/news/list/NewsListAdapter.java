@@ -2,26 +2,24 @@ package ar.com.wolox.android.training.ui.news.list;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.model.News;
+import ar.com.wolox.android.training.model.NewsLikeEvent;
 import ar.com.wolox.android.training.ui.news.details.NewsDetailsActivity;
+import ar.com.wolox.android.training.ui.news.details.NewsDetailsFragment;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     private List<News> mDataset;
@@ -46,7 +44,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
             // Setting onClick item
             v.setOnClickListener(view -> {
                 Intent intent = new Intent(v.getContext(), NewsDetailsActivity.class);
-                intent.putExtra(NewsDetailsActivity.NEWS_OBJECT, mDataset.get(getAdapterPosition()));
+                intent.putExtra(NewsDetailsFragment.NEWS_OBJECT, mDataset.get(getAdapterPosition()));
                 v.getContext().startActivity(intent);
             });
         }
@@ -75,12 +73,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.mImage.setImageRequest(imageRequest);
 
         holder.mSince.setText(news.getSince());
-        holder.mLike.setImageResource(news.isLikedByUser(mPresenter.getUserId()) ? R.drawable.ic_like_default_on : R.drawable.ic_like_default_off);
+        holder.mLike.setImageResource(news.isLikedByUser(mPresenter.getUserId()) ? R.drawable.ic_like_on : R.drawable.ic_like_off);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void onNewsLikeEvent(NewsLikeEvent event) {
+        News news = mDataset.stream().filter(n -> n.getId().equals(event.getIdNews())).findFirst().get();
+        event.applyTo(news);
+        this.notifyItemChanged(mDataset.indexOf(news));
     }
 }

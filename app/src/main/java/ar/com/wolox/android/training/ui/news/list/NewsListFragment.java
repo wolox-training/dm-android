@@ -1,15 +1,23 @@
 package ar.com.wolox.android.training.ui.news.list;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +26,7 @@ import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.model.News;
+import ar.com.wolox.android.training.model.NewsLikeEvent;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
 import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.news.form.NewsFormActivity;
@@ -28,10 +37,14 @@ import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class NewsListFragment extends WolmoFragment<NewsListPresenter> implements INewsListView, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.fragment_news_list_recycler_view) RecyclerView mRecyclerView;
-    @BindView(R.id.fragment_news_list_swipe_container) SwipeRefreshLayout mSwipeLayout;
-    @BindView(R.id.fragment_news_list_fab) FloatingActionButton mFAB;
-    @BindView(R.id.fragment_news_list_empty) TextView mEmpty;
+    @BindView(R.id.fragment_news_list_recycler_view)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.fragment_news_list_swipe_container)
+    SwipeRefreshLayout mSwipeLayout;
+    @BindView(R.id.fragment_news_list_fab)
+    FloatingActionButton mFAB;
+    @BindView(R.id.fragment_news_list_empty)
+    TextView mEmpty;
     private LinearLayoutManager mLayoutManager;
     private NewsListAdapter mNewsAdapter;
     private List<News> mAllNews;
@@ -43,7 +56,9 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
     private Boolean isLoading = false;
     private Boolean isLastPage = false;
 
-    @Inject public NewsListFragment() { }
+    @Inject
+    public NewsListFragment() {
+    }
 
     @Override
     public int layout() {
@@ -189,5 +204,23 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         mNewsAdapter.notifyDataSetChanged();
         hideEmptyMessage();
         completeLoading();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Subscribe
+    public void onNewsLikeEvent(NewsLikeEvent event) {
+        mNewsAdapter.onNewsLikeEvent(event);
     }
 }
