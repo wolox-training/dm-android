@@ -39,9 +39,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        if(getPresenter().getUserEmail() != null) {
-            goToHome();
-        }
+        mLoginBtn.setText(R.string.login_login_btn_text);
+        mLoginBtn.setColor(R.color.white);
+        mSignupBtn.setText(R.string.login_signup_btn_text);
+        mSignupBtn.setTextColor(R.color.white);
+        mSignupBtn.setColor(R.color.colorPrimary);
+        mTermsAndConditions.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public void goToHome() {
