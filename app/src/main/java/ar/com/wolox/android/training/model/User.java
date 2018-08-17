@@ -1,7 +1,9 @@
 package ar.com.wolox.android.training.model;
 
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
     private String username;
     private String email;
@@ -12,6 +14,21 @@ public class User {
     private String location;
     private String name;
     private String phone;
+
+    public User() {}
+
+    public User(Integer id, String username, String email, String password, String picture, String cover, String description, String location, String name, String phone) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.picture = picture;
+        this.cover = cover;
+        this.description = description;
+        this.location = location;
+        this.name = name;
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
