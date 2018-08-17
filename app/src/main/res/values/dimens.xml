@@ -44,6 +44,7 @@
     <dimen name="font_large_extra">20sp</dimen>
     <dimen name="font_big">22sp</dimen>
     <dimen name="font_huge">24sp</dimen>
+    <dimen name="login_logo_spacing_top">100dp</dimen>
 
     <!-- Add your custom dimens here -->
 </resources>

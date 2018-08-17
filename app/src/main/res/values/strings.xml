@@ -1,6 +1,7 @@
 <resources>
 
     <!-- General -->
+    <string name="empty_button">[BUTTON_TEXT]</string>
     <string name="example_title">ExampleFragment</string>
     <string name="example_textview">Press the button to generate a random number</string>
     <string name="example_randomize">Randomize</string>
@@ -14,8 +15,8 @@
     <!-- Login -->
     <string name="fragment_login_email">Email</string>
     <string name="fragment_login_password">Password</string>
-    <string name="fragment_login_login">Log In</string>
-    <string name="fragment_login_signup">Sign Up</string>
-    <string name="fragment_login_terms_conditions">By joining you agree to our Terms &amp; Conditions</string>
+    <string name="login_login_btn_text">Log In</string>
+    <string name="login_signup_btn_text">Sign Up</string>
+    <string name="fragment_login_terms_conditions">By joining you agree to our <a href="http://www.wolox.com.ar/">Terms &amp; Conditions</a></string>
 
 </resources>
