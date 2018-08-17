@@ -1,6 +1,7 @@
 package ar.com.wolox.android.training.di;
 
 import ar.com.wolox.android.training.ui.RootActivity;
+import ar.com.wolox.android.training.ui.RootFragment;
 import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.home.HomeFragment;
 import ar.com.wolox.android.training.ui.login.LoginActivity;
@@ -18,6 +19,9 @@ public abstract class AppModule {
 
     @ContributesAndroidInjector
     abstract RootActivity rootActivity();
+
+    @ContributesAndroidInjector
+    abstract RootFragment rootFragment();
 
     // Login
 

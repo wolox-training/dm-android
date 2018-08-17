@@ -2,14 +2,21 @@ package ar.com.wolox.android.training.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.training.ui.home.HomeActivity;
 import ar.com.wolox.android.training.ui.login.LoginActivity;
+import ar.com.wolox.android.training.ui.login.LoginFragment;
 import ar.com.wolox.android.training.utils.Extras;
 import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 
 public class RootActivity extends WolmoActivity {
+
+    @Inject
+    RootFragment mRootFragment;
 
     @Override
     protected int layout() {
@@ -18,16 +25,6 @@ public class RootActivity extends WolmoActivity {
 
     @Override
     protected void init() {
-        SharedPreferences email = getSharedPreferences(Extras.UserLogin.EMAIL, MODE_PRIVATE);
-        Intent intent;
-        if (email != null) {
-            intent = new Intent(this, HomeActivity.class);
-        } else {
-            intent = new Intent(this, LoginActivity.class);
-        }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        this.finish();
+        replaceFragment(R.id.activity_base_content, mRootFragment);
     }
 }
