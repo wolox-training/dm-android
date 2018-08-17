@@ -20,7 +20,7 @@ public class RootPresenter extends BasePresenter<ISignupView> {
         mUserSession = userSession;
     }
 
-    public Boolean isUserLoged() {
+    public Boolean isUserLogged() {
         return mUserSession.getEmail() != null;
     }
 }
