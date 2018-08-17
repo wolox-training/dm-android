@@ -18,6 +18,6 @@ public class SignupActivity extends WolmoActivity {
 
     @Override
     protected void init() {
-        replaceFragment(R.id.activity_base_content, mSignupFragment);
+            replaceFragment(R.id.activity_base_content, mSignupFragment);
     }
 }

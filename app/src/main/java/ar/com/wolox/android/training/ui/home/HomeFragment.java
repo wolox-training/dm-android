@@ -22,8 +22,7 @@ public class HomeFragment extends WolmoFragment<HomePresenter> implements IHomeV
     }
 
     @Override
-    public void init() {
-    }
+    public void init() { }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
