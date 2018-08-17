@@ -40,6 +40,8 @@
             android:name=".training.ui.news.details.NewsDetailsActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".training.ui.fullscreen_image.FullScreenImageActivity" />
+
     </application>
 
 </manifest>

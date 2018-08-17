@@ -13,10 +13,9 @@
         android:elevation="10dp">
 
         <ar.com.wolox.android.training.ui.views.ToolbarView
+            android:id="@+id/fragment_home_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleText="@string/page_home_toolbar_title"
-            app:imageResource="@drawable/wolox_logo" />
+            android:layout_height="wrap_content" />
 
 
         <android.support.design.widget.TabLayout

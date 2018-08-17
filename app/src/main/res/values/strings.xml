@@ -1,5 +1,6 @@
 <resources>
     <!-- General -->
+    <string name="empty_toolbar">[TOOLBAR_TITLE]</string>
     <string name="tab_news">News</string>
     <string name="tab_profile">Profile</string>
 

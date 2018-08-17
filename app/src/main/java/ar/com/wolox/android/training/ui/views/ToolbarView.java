@@ -1,47 +1,69 @@
 package ar.com.wolox.android.training.ui.views;
 
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
+import java.util.concurrent.Callable;
+
 import ar.com.wolox.android.R;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ToolbarView extends Toolbar {
 
-    private String mTitle;
-    private int mImageResource;
+    @BindView(R.id.toolbar_title) TextView mTitle;
+    @BindView(R.id.toolbar_image) ImageView mImage;
+
+    public ToolbarView(Context context) {
+        super(context);
+        init();
+    }
 
     public ToolbarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ToolbarView, 0, 0);
-
-        try {
-            mTitle = attributes.getString(R.styleable.ToolbarView_titleText);
-            mImageResource = attributes.getResourceId(R.styleable.ToolbarView_imageResource, -1);
-        } finally {
-            attributes.recycle();
-        }
-
-        init(context, attrs);
+        init();
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    public ToolbarView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    public ToolbarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
+    private void init() {
         this.setContentInsetsAbsolute(0, 0);
-        inflate(getContext(), R.layout.toolbar, this);
-        setToolbarTitle(mTitle);
-        setImageResource(mImageResource);
+        View view = inflate(getContext(), R.layout.toolbar, this);
+        ButterKnife.bind(this, view);
+        setTitle(R.string.empty_toolbar);
+        setImage(R.drawable.wolox_logo);
     }
 
-    public void setToolbarTitle(String title) {
-        ((TextView) findViewById(R.id.toolbar_title)).setText(title);
+    public void setTitle(int titleRes) {
+        mTitle.setText(getResources().getString(titleRes));
     }
 
-    public void setImageResource(int imageResource) {
-        ((ImageView) findViewById(R.id.toolbar_image)).setImageResource(imageResource);
+    public void setTitleColor(int colorRes) {
+        mTitle.setTextColor(getResources().getColor(colorRes));
+    }
+
+    public void setImage(int imageRes) {
+        mImage.setImageResource(imageRes);
+    }
+
+    public void setOnImageClick(OnClickListener onImageClick) {
+        mImage.setOnClickListener(onImageClick);
+    }
+
+    public void setImageColorFilter(int colorRes) {
+        mImage.setColorFilter(getResources().getColor(colorRes));
     }
 }

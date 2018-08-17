@@ -1,5 +1,7 @@
 package ar.com.wolox.android.training.di;
 
+import ar.com.wolox.android.training.ui.fullscreen_image.FullScreenImageActivity;
+import ar.com.wolox.android.training.ui.fullscreen_image.FullScreenImageFragment;
 import ar.com.wolox.android.training.ui.login.LoginActivity;
 import ar.com.wolox.android.training.ui.login.LoginFragment;
 
@@ -46,4 +48,12 @@ public abstract class AppModule {
 
     @ContributesAndroidInjector
     abstract NewsDetailsFragment newsDetailsFragment();
+
+    // Fullscreen image
+
+    @ContributesAndroidInjector
+    abstract FullScreenImageActivity fullScreenImageActivity();
+
+    @ContributesAndroidInjector
+    abstract FullScreenImageFragment fullScreenImageFragment();
 }
