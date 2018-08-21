@@ -72,12 +72,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
         Fresco.initialize(getContext());
 
         // FAB onClick
-        mFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToForm();
-            }
-        });
+        mFAB.setOnClickListener(view -> goToForm());
 
         // Setting Recycler View
         mLayoutManager = new LinearLayoutManager(getContext());
