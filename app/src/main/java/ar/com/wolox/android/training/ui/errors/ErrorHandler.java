@@ -1,11 +1,13 @@
 package ar.com.wolox.android.training.ui.errors;
 
+import android.content.Context;
 import android.content.res.Resources;
 
 import ar.com.wolox.android.R;
+import ar.com.wolox.android.training.TrainingApplication;
 
 public class ErrorHandler {
-    public static String getErrorMessage(ErrorCode errorCode) {
+    public static String getErrorMessage(Context context, ErrorCode errorCode) {
         int code;
         switch (errorCode) {
             case EMPTY_FIELDS:
@@ -33,6 +35,6 @@ public class ErrorHandler {
                 break;
         }
 
-        return Resources.getSystem().getString(code);
+        return context.getResources().getString(code);
     }
 }

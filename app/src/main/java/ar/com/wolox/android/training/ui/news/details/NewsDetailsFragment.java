@@ -134,7 +134,7 @@ public class NewsDetailsFragment extends WolmoFragment<NewsDetailsPresenter> imp
     public void onUpdateLikesError(ErrorCode errorCode) {
         toogleUserLike();
         mLike.setImageResource(getNewsLikeRes());
-        Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), ErrorHandler.getErrorMessage(getContext(), errorCode), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class NewsDetailsFragment extends WolmoFragment<NewsDetailsPresenter> imp
     @Override
     public void onRefreshError(ErrorCode errorCode) {
         completeLoading();
-        Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), ErrorHandler.getErrorMessage(getContext(), errorCode), Toast.LENGTH_LONG).show();
     }
 
     @Override

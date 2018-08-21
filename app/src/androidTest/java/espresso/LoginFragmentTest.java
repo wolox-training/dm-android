@@ -1,7 +1,9 @@
 package espresso;
 
+import android.content.Context;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.test.InstrumentationTestCase;
 import android.widget.TextView;
 
 import org.junit.Before;
@@ -23,7 +25,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
-public class LoginFragmentTest {
+public class LoginFragmentTest extends InstrumentationTestCase {
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -33,7 +35,7 @@ public class LoginFragmentTest {
     public void setErrorEmptyEmail() {
         onView(withId(R.id.fragment_login_login)).perform(click());
         onView(withId(R.id.fragment_login_email))
-                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS))));
+                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(getInstrumentation().getContext(), ErrorCode.EMPTY_FIELDS))));
     }
 
     @Test
@@ -42,7 +44,7 @@ public class LoginFragmentTest {
         onView(withId(R.id.fragment_login_email)).perform(typeText("email"));
         onView(withId(R.id.fragment_login_login)).perform(click());
         onView(withId(R.id.fragment_login_password))
-                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS))));
+                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(getInstrumentation().getContext(), ErrorCode.EMPTY_FIELDS))));
     }
 
     @Test
@@ -52,6 +54,6 @@ public class LoginFragmentTest {
         onView(withId(R.id.fragment_login_password)).perform(typeText("1234"));
         onView(withId(R.id.fragment_login_login)).perform(click());
         onView(withId(R.id.fragment_login_password))
-                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS))));
+                .check(matches(hasErrorText(ErrorHandler.getErrorMessage(getInstrumentation().getContext(), ErrorCode.EMPTY_FIELDS))));
     }
 }

@@ -180,7 +180,7 @@ public class NewsListFragment extends WolmoFragment<NewsListPresenter> implement
                 break;
 
             default:
-                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(getContext(), errorCode), Toast.LENGTH_LONG).show();
                 break;
         }
     }
