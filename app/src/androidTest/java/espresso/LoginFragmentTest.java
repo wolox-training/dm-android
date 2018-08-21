@@ -1,18 +1,14 @@
 package espresso;
 
-import android.content.Context;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.InstrumentationTestCase;
-import android.widget.TextView;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ar.com.wolox.android.R;
-import ar.com.wolox.android.training.TrainingApplication;
 import ar.com.wolox.android.training.ui.errors.ErrorCode;
 import ar.com.wolox.android.training.ui.errors.ErrorHandler;
 import ar.com.wolox.android.training.ui.login.LoginActivity;

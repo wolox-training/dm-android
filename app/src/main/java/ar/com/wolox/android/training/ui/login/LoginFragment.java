@@ -1,13 +1,7 @@
 package ar.com.wolox.android.training.ui.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,9 +16,7 @@ import ar.com.wolox.android.training.ui.views.CustomButtonView;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
@@ -42,8 +34,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     ProgressBar mProgressBar;
 
     @Inject
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public int layout() {
@@ -66,7 +57,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         startActivity(intent);
         getActivity().finish();
     }
-
 
     @Override
     public void setListeners() {
