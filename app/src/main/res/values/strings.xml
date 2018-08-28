@@ -1,16 +1,17 @@
 <resources>
-
     <!-- General -->
     <string name="empty_button">[BUTTON_TEXT]</string>
-    <string name="example_title">ExampleFragment</string>
-    <string name="example_textview">Press the button to generate a random number</string>
-    <string name="example_randomize">Randomize</string>
-    <string name="example_wolox">WOLOX</string>
-    <string name="example_message">The presenter generated the number %1$d and this view is displaying it</string>
-    <string name="page_1_title">Username: %1$s</string>
-    <string name="page_1_toolbar_title">Random number example</string>
-    <string name="page_2_title">Page 2</string>
-    <string name="page_2_toolbar_title">Example Request</string>
+    <string name="empty_toolbar">[TOOLBAR_TITLE]</string>
+    <string name="tab_news">News</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- Error -->
+    <string name="error_empty_fields">Todos los campos son obligatorios</string>
+    <string name="error_invalid_email">El email ingresado es incorrecto</string>
+    <string name="error_invalid_credentials">Usuario o clave incorrectos</string>
+    <string name="error_internet_connection_error">Error en la conexion a internet</string>
+    <string name="error_no_news">No hay noticias</string>
+    <string name="error_unexpected">Unexpected error</string>
 
     <!-- Login -->
     <string name="fragment_login_email">Email</string>
@@ -19,4 +20,10 @@
     <string name="login_signup_btn_text">Sign Up</string>
     <string name="fragment_login_terms_conditions">By joining you agree to our <a href="http://www.wolox.com.ar/">Terms &amp; Conditions</a></string>
 
+    <!-- Home -->
+    <string name="page_home_toolbar_title">Wolox</string>
+
+    <!-- News -->
+    <string name="no_news">There is no news</string>
+    <string name="news_details_toolbar_title">Post</string>
 </resources>

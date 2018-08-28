@@ -46,5 +46,6 @@
     <dimen name="font_huge">24sp</dimen>
     <dimen name="login_logo_spacing_top">100dp</dimen>
 
-    <!-- Add your custom dimens here -->
+    <!-- News -->
+    <dimen name="news_list_item_height">88dp</dimen>
 </resources>

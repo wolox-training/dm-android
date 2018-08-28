@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="custom_button_view">
-        <attr name="text" format="string"></attr>
-        <attr name="color" format="color"></attr>
-        <attr name="textColor" format="color"></attr>
-    </declare-styleable>
-</resources>

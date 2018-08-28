@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Add your application custom colors here -->
     <!-- Base application colors -->
-    <color name="colorPrimary">#3caed9</color>
-    <color name="colorPrimaryDark">#1c6f8e</color>
-    <color name="colorAccent">#91be5e</color>
+    <color name="colorPrimary">#1D9BD7</color>
+    <color name="colorPrimaryDark">#0960B7</color>
+    <color name="colorAccent">#42b86d</color>
 
     <color name="white">#FFF</color>
     <color name="black">#000</color>
+
     <color name="default_grey">#cecfcf</color>
+    <color name="dark_gray">#4d4d4d</color>
+    <color name="light_gray">#989898</color>
 </resources>

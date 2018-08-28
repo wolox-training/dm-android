@@ -8,8 +8,12 @@ import javax.inject.Inject;
 @ApplicationScope
 public class UserSession {
 
+    private static final String ID = "id";
+    private static final String EMAIL = "email";
+
     private SharedPreferencesManager mSharedPreferencesManager;
     private String mEmail;
+    private String mId;
 
     @Inject
     public UserSession(SharedPreferencesManager sharedPreferencesManager) {
@@ -18,7 +22,7 @@ public class UserSession {
 
     public void setEmail(String email) {
         mEmail = email;
-        mSharedPreferencesManager.store(Extras.UserLogin.EMAIL, email);
+        mSharedPreferencesManager.store(EMAIL, email);
     }
 
     public String getEmail() {
@@ -26,8 +30,20 @@ public class UserSession {
         // application, but we should add a check in case Android decides to kill the application
         // and return to a state where this isn't initialized.
         if (mEmail == null) {
-            mEmail = mSharedPreferencesManager.get(Extras.UserLogin.EMAIL, null);
+            mEmail = mSharedPreferencesManager.get(EMAIL, null);
         }
         return mEmail;
+    }
+
+    public Integer getId() {
+        if (mId == null) {
+            mId = mSharedPreferencesManager.get(ID, null);
+        }
+        return Integer.parseInt(mId);
+    }
+
+    public void setId(Integer id) {
+        mId = String.valueOf(id);
+        mSharedPreferencesManager.store(ID, mId);
     }
 }

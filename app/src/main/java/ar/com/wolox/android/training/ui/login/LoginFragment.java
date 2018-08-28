@@ -1,13 +1,7 @@
 package ar.com.wolox.android.training.ui.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,9 +16,7 @@ import ar.com.wolox.android.training.ui.views.CustomButtonView;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 
 import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
@@ -42,8 +34,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     ProgressBar mProgressBar;
 
     @Inject
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public int layout() {
@@ -52,7 +43,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     @Override
     public void init() {
-        Log.d("DylanLog", "Entra");
         mLoginBtn.setText(R.string.login_login_btn_text);
         mLoginBtn.setColor(R.color.white);
         mSignupBtn.setText(R.string.login_signup_btn_text);
@@ -67,17 +57,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         startActivity(intent);
         getActivity().finish();
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
 
     @Override
     public void setListeners() {
@@ -101,10 +80,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
 
     public Boolean validateEmailField(String email) {
         if (email.isEmpty()) {
-            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            mEmail.setError(ErrorHandler.getErrorMessage(getContext(), ErrorCode.EMPTY_FIELDS));
             return false;
         } else if (!this.validateEmail(email)) {
-            mEmail.setError(ErrorHandler.getErrorMessage(ErrorCode.INVALID_EMAIL));
+            mEmail.setError(ErrorHandler.getErrorMessage(getContext(), ErrorCode.INVALID_EMAIL));
             return false;
         }
 
@@ -114,7 +93,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     private Boolean validatePasswordField(String password) {
 
         if (password.isEmpty()) {
-            mPassword.setError(ErrorHandler.getErrorMessage(ErrorCode.EMPTY_FIELDS));
+            mPassword.setError(ErrorHandler.getErrorMessage(getContext(), ErrorCode.EMPTY_FIELDS));
             return false;
         }
 
@@ -136,7 +115,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         switch (errorCode) {
             case INVALID_CREDENTIALS:
             case INERNET_CONNECTION_ERROR:
-                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(errorCode), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), ErrorHandler.getErrorMessage(getContext(), errorCode), Toast.LENGTH_LONG).show();
                 break;
         }
     }
